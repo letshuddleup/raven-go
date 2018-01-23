@@ -216,12 +216,10 @@ func TestCauseWithStacktrace(t *testing.T) {
 		{"pkg error wrapped thrice", pkgWrapped3, pkgErr},
 	}
 
-	for _, testCase := range testCases {
-		t.Run(testCase.name, func(t *testing.T) {
-			cause := causeWithStacktrace(testCase.inputErr)
-			if cause != testCase.expectedCause {
-				t.Errorf("expected %v; got %v", testCase.expectedCause, cause)
-			}
-		})
+	for _, tc := range testCases {
+		cause := causeWithStacktrace(tc.inputErr)
+		if cause != tc.expectedCause {
+			t.Errorf("for %s: expected %v; got %v", tc.name, tc.expectedCause, cause)
+		}
 	}
 }
