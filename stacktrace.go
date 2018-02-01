@@ -97,13 +97,6 @@ func GetOrNewStacktrace(err error, skip int, context int, appPackagePrefixes []s
 // raven.CaptureError is. This ordering presents the most information about
 // the error's context to the viewer of the report.
 func causeWithStacktrace(err error) error {
-	type causer interface {
-		Cause() error
-	}
-	type stacktracer interface {
-		StackTrace() pkgErrors.StackTrace
-	}
-
 	var withStacktrace error
 	for err != nil {
 		if _, ok := err.(stacktracer); ok {
